@@ -17,7 +17,7 @@ export default class Game extends Phaser.Scene
         this.countDesign = 0;
         this.gain = 1;
         this.bonus = 0;
-        this.tick = 1;
+        this.tick = 0;
         this.cost = 10;
         
     }
@@ -66,19 +66,28 @@ export default class Game extends Phaser.Scene
 
     devCoding()
     {
-
+        this.countDev ++;
+        this.tick += this.countDev;
     }
 
     marketBlatter()
     {
-        
+        this.countMarket ++;
     }
 
-
-
-    update()
+    designDraw()
     {
-        
+        this.countDesign ++;
+    }
+
+    update(total, dt)
+    {
+        //this.collectScore(this.CalculDelta(dt, 1));
+    }
+
+    CalculDelta(dt, ups)    //  Unité par secondes
+    {
+        return (dt / 1000 * ups);
     }
 
 }
