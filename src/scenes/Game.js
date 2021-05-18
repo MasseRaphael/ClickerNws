@@ -74,7 +74,10 @@ export default class Game extends Phaser.Scene
         this.designText = this.add.text(100, 550, `Designer: ${this.countDesign}`, styleDesign).setOrigin(0.5, 0);
 
         const styleTick = {fontSize: 20};
-        this.tickText = this.add.text(675, 200,`Tick: ${this.tick*this.delai} par seconde`, styleTick).setOrigin(0.5, 0);
+        this.tickText = this.add.text(675, 200,`Tick: ${this.tick*this.delai} seconde`, styleTick).setOrigin(0.5, 0);
+
+        const styleclick = {fontSize: 20};
+        this.clickText = this.add.text(675, 300,` ${this.gain} Points par click`, styleclick).setOrigin(0.5, 0);
 
         const styleReset = {fontSize: 20, color: '#000'};
         this.resetText = this.add.text(650, 550,`Reset`, styleReset).setOrigin(0.5, 0.5);
@@ -141,10 +144,11 @@ export default class Game extends Phaser.Scene
         this.marketCost = 10;
         this.designCost = 10;
         this.scoreText.text = `Score: ${this.score.toFixed(1)}`;
-        this.tickText.text = `Tick: ${this.tick*this.delai/1000} par seconde`
+        this.tickText.text = `Tick: ${this.tick*this.delai/1000} seconde`
         this.devText.text = `Dev: ${this.countDev}`;
         this.marketText.text = `Marketteux: ${this.countMarket}`;
         this.designText.text = `Design: ${this.countDesign}`;
+        this.clickText.text = `${this.gain.toFixed(1)} Points par click`;
     }
 
     collectScore(gain)
@@ -160,7 +164,7 @@ export default class Game extends Phaser.Scene
         this.countDev++;
         this.tick = this.countDev;
         
-        this.tickText.text = `Tick: ${this.tick*this.delai/1000} par seconde`
+        this.tickText.text = `Tick: ${(this.tick*this.delai/1000).toFixed(2)} seconde`
         this.devText.text = `Dev: ${this.countDev}`;
         
     }
@@ -172,6 +176,7 @@ export default class Game extends Phaser.Scene
         
 
         this.marketText.text = `Marketteux: ${this.countMarket}`;
+        this.clickText.text = `${this.gain.toFixed(1)} Points par click`;
     }
 
     designDraw()
@@ -179,7 +184,7 @@ export default class Game extends Phaser.Scene
         this.countDesign++;
         this.delai  = this.delai*0.99;
         
-        this.tickText.text = `Tick: ${this.tick*this.delai/1000} par seconde`
+        this.tickText.text = `Tick: ${(this.tick*this.delai/1000).toFixed(2)} seconde`
         this.designText.text = `Design: ${this.countDesign}`;
     }
 
