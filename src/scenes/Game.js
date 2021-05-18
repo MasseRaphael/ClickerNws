@@ -43,7 +43,7 @@ export default class Game extends Phaser.Scene
         this.dev = this.physics.add.image(100, 100, 'dev');
         this.market = this.physics.add.image(700, 100, 'market');
         this.design = this.physics.add.image(100, 500, 'design');
-        this.reset = this.physics.add.image(650, 550, 'reset');
+        this.reset = this.physics.add.image(675, 300, 'reset');
 
         let value = JSON.parse(localStorage.getItem('key'));
         if (value !== null)
@@ -74,16 +74,16 @@ export default class Game extends Phaser.Scene
         this.designText = this.add.text(100, 550, `Designer: ${this.countDesign}`, styleDesign).setOrigin(0.5, 0);
 
         const styleTick = {fontSize: 20};
-        this.tickText = this.add.text(675, 200,`Nombre de point par tick: ${(this.tick*1000/this.delai).toFixed(2)}`, styleTick).setOrigin(0.5, 0);
+        this.tickText = this.add.text(550, 510,`Nombre de point par tick: ${(this.tick*1000/this.delai).toFixed(2)}`, styleTick).setOrigin(0.5, 0);
 
         const styleDuree = {fontSize: 20};
-        this.dureeText = this.add.text(675, 250,`Durée d'un tick: ${(this.delai/1000).toFixed(2)} seconde`, styleDuree).setOrigin(0.5, 0);
+        this.dureeText = this.add.text(550, 550,`Durée d'un tick: ${(this.delai/1000).toFixed(2)} seconde`, styleDuree).setOrigin(0.5, 0);
 
         const styleclick = {fontSize: 20};
-        this.clickText = this.add.text(675, 300,` ${this.gain} Points par click`, styleclick).setOrigin(0.5, 0);
+        this.clickText = this.add.text(550, 470,` ${this.gain} Points par click`, styleclick).setOrigin(0.5, 0);
 
         const styleReset = {fontSize: 20, color: '#000'};
-        this.resetText = this.add.text(650, 550,`Reset`, styleReset).setOrigin(0.5, 0.5);
+        this.resetText = this.add.text(675, 300,`Reset`, styleReset).setOrigin(0.5, 0.5);
 
         // Gestion des clicks
 
@@ -152,7 +152,8 @@ export default class Game extends Phaser.Scene
         this.marketText.text = `Marketteux: ${this.countMarket}`;
         this.designText.text = `Design: ${this.countDesign}`;
         this.clickText.text = `${this.gain.toFixed(1)} Points par click`;
-        this.tickText.text = `${this.tick/(this.delai/1000)} Points par tick`;
+        this.tickText.text = `Nombre de point par tick: ${(this.tick*1000/this.delai).toFixed(2)}`;
+        this.dureeText.text = `Durée d'un tick: ${(this.delai/1000).toFixed(2)} seconde`;
     }
 
     collectScore(gain)
