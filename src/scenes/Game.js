@@ -16,7 +16,6 @@ export default class Game extends Phaser.Scene
         this.countMarket = 0;
         this.countDesign = 0;
         this.gain = 1;
-        this.bonus = 0;
         this.tick = 0;
         this.delai = 1000;
         this.devCost = 10;
@@ -58,11 +57,12 @@ export default class Game extends Phaser.Scene
         this.designText = this.add.text(100, 390, `Designer: ${this.countDesign}`, styleDesign).setOrigin(0.5, 0);
 
         const styleTick = {fontSize: 20};
-        this.tickText = this.add.text(300, 0,`Tick: ${this.tick*this.delai} par seconde`, styleTick).setOrigin(0.5, 0);
+        this.tickText = this.add.text(300, 0,`Nombre de tick: ${this.tick*1000/this.delai} par seconde`, styleTick).setOrigin(0.5, 0);
+
+        const styleGain = {fontSize: 20};
+        this.gainText = this.add.text(300, 100,`Gain: ${this.gain} par clic`, styleGain).setOrigin(0.5, 0);
 
         // Gestion des clicks
-
-
         this.nws.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {   // Utilisation d'un lambda fonction qui reprend le scope du dessus, contrairement à function qui nécessite un réassignement du "this"
             this.collectScore(this.gain);
         });
@@ -106,18 +106,18 @@ export default class Game extends Phaser.Scene
 
     collectScore(gain)
     {
+        console.log(gain);
         this.score += gain;
 
-        //  const value = `Score: ${this.score}`;
         this.scoreText.text = `Score: ${this.score.toFixed(1)}`;
     }
-    
+
     devCode()
     {
         this.countDev++;
         this.tick = this.countDev;
         
-        this.tickText.text = `Tick: ${this.tick*this.delai/1000} par seconde`
+        this.tickText.text = `Nombre de tick: ${(this.tick*1000/this.delai).toFixed(2)} par seconde`
         this.devText.text = `Dev: ${this.countDev}`;
         
     }
@@ -127,7 +127,7 @@ export default class Game extends Phaser.Scene
         this.countMarket++;
         this.gain += 0.1;
         
-
+        this.gainText.text = `Gain: ${this.gain.toFixed(1)} par clic`;
         this.marketText.text = `Marketteux: ${this.countMarket}`;
     }
 
@@ -136,7 +136,7 @@ export default class Game extends Phaser.Scene
         this.countDesign++;
         this.delai  = this.delai*0.99;
         
-        this.tickText.text = `Tick: ${this.tick*this.delai/1000} par seconde`
+        this.tickText.text = `Nombre de tick: ${(this.tick*1000/this.delai).toFixed(2)} par seconde`
         this.designText.text = `Design: ${this.countDesign}`;
     }
 
