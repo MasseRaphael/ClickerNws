@@ -68,6 +68,8 @@ export default class Game extends Phaser.Scene
             this.designDraw()
         });
         
+        let value = JSON.parse(localStorage.getItem('key'));
+        this.score = value.score;
     }
 
     collectScore(gain)
@@ -100,6 +102,11 @@ export default class Game extends Phaser.Scene
     update(total, dt)
     {
         this.collectScore(this.CalculDelta(dt, this.tick));
+
+        let stats = {
+            score: this.score
+        }
+        localStorage.setItem('key', JSON.stringify(stats));
     }
 
     CalculDelta(dt, ups)    //  Unité par secondes
