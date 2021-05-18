@@ -18,6 +18,7 @@ export default class Game extends Phaser.Scene
         this.gain = 1;
         this.bonus = 0;
         this.tick = 1;
+        this.cost = 10;
         
     }
 
@@ -35,7 +36,6 @@ export default class Game extends Phaser.Scene
 
     create()
     {
-        console.log(this.gain)
         this.nws = this.physics.add.image(400, 300, 'nws');
         this.dev = this.physics.add.image(100, 100, 'dev');
         this.market = this.physics.add.image(700, 100, 'market');
@@ -52,12 +52,8 @@ export default class Game extends Phaser.Scene
         this.designText = this.add.text(100, 550, `Designer: ${this.countDesign}`, styleStudents)
             .setOrigin(0.5, 0);
         
-
-        
-        let clic = this;
-        this.nws.setInteractive().on('pointerdown', function(pointer, localX, localY, event){
-            clic.collectScore(this.gain)
-            console.log(this.gain)
+        this.nws.setInteractive().on('pointerdown', (pointer, localX, localY, event) =>{
+            this.collectScore(this.gain)
         });
         
     }
@@ -65,10 +61,20 @@ export default class Game extends Phaser.Scene
     collectScore(gain)
     {
         this.score += gain;
-        console.log(gain)
-        //  const value = `Score: ${this.score}`;
         this.scoreText.text = `Score: ${Math.floor(this.score)}`;
     }
+
+    devCoding()
+    {
+
+    }
+
+    marketBlatter()
+    {
+        
+    }
+
+
 
     update()
     {
