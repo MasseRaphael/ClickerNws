@@ -76,6 +76,9 @@ export default class Game extends Phaser.Scene
         const styleTick = {fontSize: 20};
         this.tickText = this.add.text(675, 200,`Tick: ${this.tick*this.delai} seconde`, styleTick).setOrigin(0.5, 0);
 
+        const styleTickPerS = {fontSize: 20};
+        this.tickPerSText = this.add.text(675, 250,`${this.tick/(this.delai/1000)} Points par tick`, styleTickPerS).setOrigin(0.5, 0);
+
         const styleclick = {fontSize: 20};
         this.clickText = this.add.text(675, 300,` ${this.gain} Points par click`, styleclick).setOrigin(0.5, 0);
 
@@ -149,6 +152,7 @@ export default class Game extends Phaser.Scene
         this.marketText.text = `Marketteux: ${this.countMarket}`;
         this.designText.text = `Design: ${this.countDesign}`;
         this.clickText.text = `${this.gain.toFixed(1)} Points par click`;
+        this.tickText.text = `${this.tick/(this.delai/1000)} Points par tick`;
     }
 
     collectScore(gain)
@@ -165,6 +169,7 @@ export default class Game extends Phaser.Scene
         this.tick = this.countDev;
         
         this.tickText.text = `Tick: ${(this.tick*this.delai/1000).toFixed(2)} seconde`
+        this.tickPerSText.text = `${(this.tick/(this.delai/1000)).toFixed(2)} Points par tick`
         this.devText.text = `Dev: ${this.countDev}`;
         
     }
@@ -185,6 +190,7 @@ export default class Game extends Phaser.Scene
         this.delai  = this.delai*0.99;
         
         this.tickText.text = `Tick: ${(this.tick*this.delai/1000).toFixed(2)} seconde`
+        this.tickPerSText.text = `${(this.tick/(this.delai/1000)).toFixed(2)} Points par tick`
         this.designText.text = `Design: ${this.countDesign}`;
     }
 
