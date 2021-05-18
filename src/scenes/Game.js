@@ -59,8 +59,8 @@ export default class Game extends Phaser.Scene
         const styleTick = {fontSize: 20};
         this.tickText = this.add.text(300, 0,`Nombre de point par tick: ${this.tick*1000/this.delai}`, styleTick).setOrigin(0.5, 0);
 
-        const styleGain = {fontSize: 20};
-        this.gainText = this.add.text(300, 100,`Gain: ${this.gain} par clic`, styleGain).setOrigin(0.5, 0);
+        const styleDuree = {fontSize: 20};
+        this.dureeText = this.add.text(300, 100,`Durée d'un tick: ${(this.delai/1000).toFixed(2)} seconde`, styleDuree).setOrigin(0.5, 0);
 
         // Gestion des clicks
         this.nws.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {   // Utilisation d'un lambda fonction qui reprend le scope du dessus, contrairement à function qui nécessite un réassignement du "this"
@@ -136,7 +136,8 @@ export default class Game extends Phaser.Scene
         this.countDesign++;
         this.delai  = this.delai*0.99;
         
-        this.tickText.text = `Nombre de point par tick: ${(this.tick*1000/this.delai).toFixed(2)}`
+        this.tickText.text = `Nombre de point par tick: ${(this.tick*1000/this.delai).toFixed(2)}`;
+        this.dureeText.text = `Durée d'un tick: ${(this.delai/1000).toFixed(2)} seconde`;
         this.designText.text = `Design: ${this.countDesign}`;
     }
 
