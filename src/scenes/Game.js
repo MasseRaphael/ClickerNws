@@ -41,6 +41,19 @@ export default class Game extends Phaser.Scene
         this.market = this.physics.add.image(700, 100, 'market');
         this.design = this.physics.add.image(100, 500, 'design');
 
+        let value = JSON.parse(localStorage.getItem('key'));
+        if (value !== null)
+        {
+            this.score = value.score;
+            this.countDev = value.countDev;
+            this.countMarket = value.countMarket;
+            this.countDesign = value.countDesign;
+            this.gain = value.gain;
+            this.tick = value.tick;
+            this.cost = value.cost;
+            this.delay = value.delay;
+        }
+
         const styleScore = {fontSize: 20};
         this.scoreText = this.add.text(400, 10, `Score: ${this.score}`, styleScore)
             .setOrigin(0.5, 0);
@@ -68,8 +81,6 @@ export default class Game extends Phaser.Scene
             this.designDraw()
         });
         
-        let value = JSON.parse(localStorage.getItem('key'));
-        this.score = value.score;
     }
 
     collectScore(gain)
@@ -81,7 +92,7 @@ export default class Game extends Phaser.Scene
     devCoding()
     {
         this.countDev ++;
-        this.tick += this.countDev;
+        this.tick = this.countDev;
         this.devText.text = `Dev: ${this.countDev}`;
     }
 
@@ -104,7 +115,14 @@ export default class Game extends Phaser.Scene
         this.collectScore(this.CalculDelta(dt, this.tick));
 
         let stats = {
-            score: this.score
+            score: this.score,
+            countDev: this.countDev,
+            countMarket: this.countMarket,
+            countDesign: this.countDesign,
+            gain: this.gain,
+            tick: this.tick,
+            cost: this.cost,
+            delay: this.delay
         }
         localStorage.setItem('key', JSON.stringify(stats));
     }
