@@ -65,11 +65,13 @@ export default class Game extends Phaser.Scene
         });
 
         this.dev.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
-            if(this.score <= devCost)
+            if(this.score < this.devCost)
             {
                 return
             }else{
                 this.devCode();
+                this.score -= this.devCost;
+
             }
             
         });
@@ -112,7 +114,7 @@ export default class Game extends Phaser.Scene
     designDraw()
     {
         this.countDesign++;
-        this.delai  = this.delai*0.9;
+        this.delai  = this.delai*0.99;
         
 
         this.designText.text = `Design: ${this.countDesign}`;
