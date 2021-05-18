@@ -30,6 +30,7 @@ export default class Game extends Phaser.Scene
         this.load.image('dev', 'assets/logo-dev.png');
         this.load.image('market', 'assets/logo-marketing.png');
         this.load.image('design', 'assets/logo-design.png');
+        this.load.image('reset', 'assets/buttonDefault.png');
 
         //  Preload des contrôles (Souris)
         this.pointer = this.input.activePointer;
@@ -42,6 +43,7 @@ export default class Game extends Phaser.Scene
         this.dev = this.physics.add.image(100, 100, 'dev');
         this.market = this.physics.add.image(700, 100, 'market');
         this.design = this.physics.add.image(100, 500, 'design');
+        this.reset = this.physics.add.image(650, 550, 'reset');
 
         let value = JSON.parse(localStorage.getItem('key'));
         if (value !== null)
@@ -73,6 +75,9 @@ export default class Game extends Phaser.Scene
 
         const styleTick = {fontSize: 20};
         this.tickText = this.add.text(675, 200,`Tick: ${this.tick*this.delai} par seconde`, styleTick).setOrigin(0.5, 0);
+
+        const styleReset = {fontSize: 20, color: '#000'};
+        this.resetText = this.add.text(650, 550,`Reset`, styleReset).setOrigin(0.5, 0.5);
 
         // Gestion des clicks
 
@@ -116,6 +121,30 @@ export default class Game extends Phaser.Scene
             }
             
         });
+
+        this.reset.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {   // Utilisation d'un lambda fonction qui reprend le scope du dessus, contrairement à function qui nécessite un réassignement du "this"
+            this.resetGame();
+        });
+    }
+
+    resetGame()
+    {
+        localStorage.removeItem('key');
+        this.score = 0;
+        this.countDev = 0;
+        this.countMarket = 0;
+        this.countDesign = 0;
+        this.gain = 1;
+        this.tick = 0;
+        this.delai = 1000;
+        this.devCost = 10;
+        this.marketCost = 10;
+        this.designCost = 10;
+        this.scoreText.text = `Score: ${this.score.toFixed(1)}`;
+        this.tickText.text = `Tick: ${this.tick*this.delai/1000} par seconde`
+        this.devText.text = `Dev: ${this.countDev}`;
+        this.marketText.text = `Marketteux: ${this.countMarket}`;
+        this.designText.text = `Design: ${this.countDesign}`;
     }
 
     collectScore(gain)
