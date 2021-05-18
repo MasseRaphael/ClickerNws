@@ -57,6 +57,9 @@ export default class Game extends Phaser.Scene
         const styleDesign = {fontSize: 20};
         this.designText = this.add.text(100, 390, `Designer: ${this.countDesign}`, styleDesign).setOrigin(0.5, 0);
 
+        const styleTick = {fontSize: 20};
+        this.tickText = this.add.text(300, 0,`Tick: ${this.tick*this.delai} par seconde`, styleTick).setOrigin(0.5, 0);
+
         // Gestion des clicks
 
 
@@ -114,8 +117,9 @@ export default class Game extends Phaser.Scene
         this.countDev++;
         this.tick = this.countDev;
         
-
+        this.tickText.text = `Tick: ${this.tick*this.delai/1000} par seconde`
         this.devText.text = `Dev: ${this.countDev}`;
+        
     }
 
     marketBlatter()
@@ -132,7 +136,7 @@ export default class Game extends Phaser.Scene
         this.countDesign++;
         this.delai  = this.delai*0.99;
         
-
+        this.tickText.text = `Tick: ${this.tick*this.delai/1000} par seconde`
         this.designText.text = `Design: ${this.countDesign}`;
     }
 
