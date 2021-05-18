@@ -175,7 +175,7 @@ export default class Game extends Phaser.Scene
 
     CalculDelta(dt, ups)    //  Unité par secondes
     {
-        return (dt / this.delay * ups);
+        return (dt / this.delai * ups);
     }
 
 }
