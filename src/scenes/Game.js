@@ -57,7 +57,7 @@ export default class Game extends Phaser.Scene
         this.designText = this.add.text(100, 390, `Designer: ${this.countDesign}`, styleDesign).setOrigin(0.5, 0);
 
         const styleTick = {fontSize: 20};
-        this.tickText = this.add.text(300, 0,`Nombre de tick: ${this.tick*1000/this.delai} par seconde`, styleTick).setOrigin(0.5, 0);
+        this.tickText = this.add.text(300, 0,`Nombre de point par tick: ${this.tick*1000/this.delai}`, styleTick).setOrigin(0.5, 0);
 
         const styleGain = {fontSize: 20};
         this.gainText = this.add.text(300, 100,`Gain: ${this.gain} par clic`, styleGain).setOrigin(0.5, 0);
@@ -117,7 +117,7 @@ export default class Game extends Phaser.Scene
         this.countDev++;
         this.tick = this.countDev;
         
-        this.tickText.text = `Nombre de tick: ${(this.tick*1000/this.delai).toFixed(2)} par seconde`
+        this.tickText.text = `Nombre de point par tick: ${(this.tick*1000/this.delai).toFixed(2)}`
         this.devText.text = `Dev: ${this.countDev}`;
         
     }
@@ -136,7 +136,7 @@ export default class Game extends Phaser.Scene
         this.countDesign++;
         this.delai  = this.delai*0.99;
         
-        this.tickText.text = `Nombre de tick: ${(this.tick*1000/this.delai).toFixed(2)} par seconde`
+        this.tickText.text = `Nombre de point par tick: ${(this.tick*1000/this.delai).toFixed(2)}`
         this.designText.text = `Design: ${this.countDesign}`;
     }
 
