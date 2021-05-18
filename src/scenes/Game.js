@@ -16,10 +16,10 @@ export default class Game extends Phaser.Scene
         this.countMarket = 0;
         this.countDesign = 0;
         this.gain = 1;
-        this.bonus = 0;
+        this.bonus = 0.1;
         this.tick = 0;
         this.cost = 10;
-        
+        this.delay = 1000;
     }
 
     preload()
@@ -55,39 +55,56 @@ export default class Game extends Phaser.Scene
         this.nws.setInteractive().on('pointerdown', (pointer, localX, localY, event) =>{
             this.collectScore(this.gain)
         });
+
+        this.dev.setInteractive().on('pointerdown', (pointer, localX, localY, event) =>{
+            this.devCoding()
+        });
+
+        this.market.setInteractive().on('pointerdown', (pointer, localX, localY, event) =>{
+            this.marketBlatter()
+        });
+
+        this.design.setInteractive().on('pointerdown', (pointer, localX, localY, event) =>{
+            this.designDraw()
+        });
         
     }
 
     collectScore(gain)
     {
         this.score += gain;
-        this.scoreText.text = `Score: ${Math.floor(this.score)}`;
+        this.scoreText.text = `Score: ${this.score.toFixed(1)}`;
     }
 
     devCoding()
     {
         this.countDev ++;
         this.tick += this.countDev;
+        this.devText.text = `Dev: ${this.countDev}`;
     }
 
     marketBlatter()
     {
         this.countMarket ++;
+        this.gain += this.bonus
+        this.marketText.text = `Marketeux: ${this.countMarket}`;
     }
 
     designDraw()
     {
         this.countDesign ++;
+        this.delay = this.delay*0.99;
+        this.designText.text = `Designer: ${this.countDesign}`;
     }
 
     update(total, dt)
     {
-        //this.collectScore(this.CalculDelta(dt, 1));
+        this.collectScore(this.CalculDelta(dt, this.tick));
     }
 
     CalculDelta(dt, ups)    //  Unité par secondes
     {
-        return (dt / 1000 * ups);
+        return (dt / this.delay * ups);
     }
 
 }
