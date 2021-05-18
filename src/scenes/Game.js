@@ -71,17 +71,33 @@ export default class Game extends Phaser.Scene
             }else{
                 this.devCode();
                 this.score -= this.devCost;
-
+                this.devCost += this.devCost/10
             }
             
         });
 
         this.market.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
-            this.marketBlatter();
+            if(this.score < this.marketCost)
+            {
+                return
+            }else{
+                this.marketBlatter();
+                this.score -= this.marketCost;
+                this.marketCost += this.marketCost/10
+            }
+            
         });
 
         this.design.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
-            this.designDraw();
+            if(this.score < this.designCost)
+            {
+                return
+            }else{
+                this.designDraw();
+                this.score -= this.designCost;
+                this.designCost += this.designCost/10
+            }
+            
         });
     }
 
