@@ -30,10 +30,9 @@ export default class Game extends Phaser.Scene
         this.load.image('dev', 'assets/logo-dev.png');
         this.load.image('market', 'assets/logo-marketing.png');
         this.load.image('design', 'assets/logo-design.png');
-<<<<<<< HEAD
-=======
+
         this.load.image('reset', 'assets/buttonDefault.png');
->>>>>>> Raphaël
+
 
         //  Preload des contrôles (Souris)
         this.pointer = this.input.activePointer;
@@ -42,12 +41,7 @@ export default class Game extends Phaser.Scene
     create()
     {   
         //  Pose des images
-<<<<<<< HEAD
-        this.nws = this.physics.add.image(400, 300, 'NWS').setScale(1);
-        this.dev = this.physics.add.image(100, 100, 'dev');
-        this.market = this.physics.add.image(700, 100, 'market');
-        this.design = this.physics.add.image(100, 500, 'design');
-=======
+
         this.nws = this.physics.add.image(400, 300, 'NWS');
         this.dev = this.physics.add.image(100, 100, 'dev');
         this.market = this.physics.add.image(700, 100, 'market');
@@ -68,30 +62,16 @@ export default class Game extends Phaser.Scene
             this.marketCost = value.marketCost;
             this.designCost = value.designCost;
         }
->>>>>>> Raphaël
+
 
         // Compteurs
         const styleScore = {fontSize: 30};
         this.scoreText = this.add.text(400, 10, `Score: ${this.score}`, styleScore).setOrigin(0.5, 0);
 
         const styleDev = {fontSize: 20};
-<<<<<<< HEAD
-        this.devText = this.add.text(100, 110, `Dev: ${this.countDev}`, styleDev).setOrigin(0.5, 0);
-        
-        const styleMarket = {fontSize: 20};
-        this.marketText = this.add.text(700, 110, `Marketteux: ${this.countMarket}`, styleMarket).setOrigin(0.5, 0);
-        
-        const styleDesign = {fontSize: 20};
-        this.designText = this.add.text(100, 390, `Designer: ${this.countDesign}`, styleDesign).setOrigin(0.5, 0);
-
-        const styleTick = {fontSize: 20};
-        this.tickText = this.add.text(300, 0,`Nombre de point par tick: ${this.tick*1000/this.delai}`, styleTick).setOrigin(0.5, 0);
-
-        const styleDuree = {fontSize: 20};
-        this.dureeText = this.add.text(300, 100,`Durée d'un tick: ${(this.delai/1000).toFixed(2)} seconde`, styleDuree).setOrigin(0.5, 0);
 
         // Gestion des clicks
-=======
+
         this.devText = this.add.text(100, 150, `Dev: ${this.countDev}`, styleDev).setOrigin(0.5, 0);
         
         const styleMarket = {fontSize: 20};
@@ -115,7 +95,7 @@ export default class Game extends Phaser.Scene
         // Gestion des clicks
 
 
->>>>>>> Raphaël
+
         this.nws.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {   // Utilisation d'un lambda fonction qui reprend le scope du dessus, contrairement à function qui nécessite un réassignement du "this"
             this.collectScore(this.gain);
         });
@@ -155,18 +135,7 @@ export default class Game extends Phaser.Scene
             }
             
         });
-<<<<<<< HEAD
-    }
 
-    collectScore(gain)
-    {
-        console.log(gain);
-        this.score += gain;
-
-        this.scoreText.text = `Score: ${this.score.toFixed(1)}`;
-    }
-
-=======
 
         this.reset.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {   // Utilisation d'un lambda fonction qui reprend le scope du dessus, contrairement à function qui nécessite un réassignement du "this"
             this.resetGame();
@@ -204,7 +173,6 @@ export default class Game extends Phaser.Scene
         this.scoreText.text = `Score: ${this.score.toFixed(1)}`;
     }
     
->>>>>>> Raphaël
     devCode()
     {
         this.countDev++;
@@ -220,14 +188,10 @@ export default class Game extends Phaser.Scene
         this.countMarket++;
         this.gain += 0.1;
         
-<<<<<<< HEAD
-        this.gainText.text = `Gain: ${this.gain.toFixed(1)} par clic`;
-        this.marketText.text = `Marketteux: ${this.countMarket}`;
-=======
-
+        
         this.marketText.text = `Marketteux: ${this.countMarket}`;
         this.clickText.text = `${this.gain.toFixed(1)} Points par click`;
->>>>>>> Raphaël
+
     }
 
     designDraw()
@@ -238,8 +202,6 @@ export default class Game extends Phaser.Scene
         this.tickText.text = `Nombre de point par tick: ${(this.tick*1000/this.delai).toFixed(2)}`;
         this.dureeText.text = `Durée d'un tick: ${(this.delai/1000).toFixed(2)} seconde`;
         this.designText.text = `Design: ${this.countDesign}`;
-<<<<<<< HEAD
-=======
     }
 
     update(total, dt)
@@ -259,17 +221,6 @@ export default class Game extends Phaser.Scene
             designCost: this.designCost
         }
         localStorage.setItem('key', JSON.stringify(stats));
-    }
-
-    CalculDelta(dt, ups)    //  Unité par secondes
-    {
-        return (dt / this.delai * ups);
->>>>>>> Raphaël
-    }
-
-    update(total, dt)
-    {
-        this.collectScore(this.CalculDelta(dt, this.tick));
     }
 
     CalculDelta(dt, ups)    //  Unité par secondes
