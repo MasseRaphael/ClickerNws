@@ -74,10 +74,10 @@ export default class Game extends Phaser.Scene
         this.designText = this.add.text(100, 550, `Designer: ${this.countDesign}`, styleDesign).setOrigin(0.5, 0);
 
         const styleTick = {fontSize: 20};
-        this.tickText = this.add.text(675, 200,`Tick: ${this.tick*this.delai} seconde`, styleTick).setOrigin(0.5, 0);
+        this.tickText = this.add.text(675, 200,`Nombre de point par tick: ${(this.tick*1000/this.delai).toFixed(2)}`, styleTick).setOrigin(0.5, 0);
 
-        const styleTickPerS = {fontSize: 20};
-        this.tickPerSText = this.add.text(675, 250,`${this.tick/(this.delai/1000)} Points par tick`, styleTickPerS).setOrigin(0.5, 0);
+        const styleDuree = {fontSize: 20};
+        this.dureeText = this.add.text(675, 250,`Durée d'un tick: ${(this.delai/1000).toFixed(2)} seconde`, styleDuree).setOrigin(0.5, 0);
 
         const styleclick = {fontSize: 20};
         this.clickText = this.add.text(675, 300,` ${this.gain} Points par click`, styleclick).setOrigin(0.5, 0);
@@ -168,8 +168,7 @@ export default class Game extends Phaser.Scene
         this.countDev++;
         this.tick = this.countDev;
         
-        this.tickText.text = `Tick: ${(this.tick*this.delai/1000).toFixed(2)} seconde`
-        this.tickPerSText.text = `${(this.tick/(this.delai/1000)).toFixed(2)} Points par tick`
+        this.tickText.text = `Nombre de point par tick: ${(this.tick*1000/this.delai).toFixed(2)}`
         this.devText.text = `Dev: ${this.countDev}`;
         
     }
@@ -189,8 +188,8 @@ export default class Game extends Phaser.Scene
         this.countDesign++;
         this.delai  = this.delai*0.99;
         
-        this.tickText.text = `Tick: ${(this.tick*this.delai/1000).toFixed(2)} seconde`
-        this.tickPerSText.text = `${(this.tick/(this.delai/1000)).toFixed(2)} Points par tick`
+        this.tickText.text = `Nombre de point par tick: ${(this.tick*1000/this.delai).toFixed(2)}`;
+        this.dureeText.text = `Durée d'un tick: ${(this.delai/1000).toFixed(2)} seconde`;
         this.designText.text = `Design: ${this.countDesign}`;
     }
 
