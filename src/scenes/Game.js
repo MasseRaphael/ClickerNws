@@ -86,9 +86,6 @@ export default class Game extends Phaser.Scene
         const styleDuree = {fontSize: 20};
         this.dureeText = this.add.text(550, 550,`Durée d'un tick: ${(this.delai/1000).toFixed(2)} seconde`, styleDuree).setOrigin(0.5, 0);
 
-        const styleclick = {fontSize: 20};
-        this.clickText = this.add.text(550, 470,` ${this.gain} Points par click`, styleclick).setOrigin(0.5, 0);
-
         const styleReset = {fontSize: 20, color: '#000'};
         this.resetText = this.add.text(675, 300,`Reset`, styleReset).setOrigin(0.5, 0.5);
 
@@ -207,6 +204,9 @@ export default class Game extends Phaser.Scene
     update(total, dt)
     {
         this.collectScore(this.CalculDelta(dt, this.tick));
+        
+        const styleclick = {fontSize: 20};
+        this.clickText = this.add.text(550, 470,` ${this.gain} Points par click`, styleclick).setOrigin(0.5, 0);
 
         let stats = {
             score: this.score,
