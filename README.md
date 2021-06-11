@@ -10,4 +10,4 @@ Exercice sur phaser dont le but était de créer un clicker dont le fonctionneme
 
 ## Demo
 
-[Vercel](https://clicker-nws.vercel.app/)
+Sur [Vercel](https://clicker-nws.vercel.app/)
